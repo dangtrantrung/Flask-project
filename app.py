@@ -4,7 +4,7 @@ app=Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Hello world"
+    return "<h1> Flask AI Web App </h1>"
 
 
 
