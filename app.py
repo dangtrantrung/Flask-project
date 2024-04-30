@@ -9,9 +9,15 @@ app=Flask(__name__)
 def index():
     return "<h1> Flask AI Web App </h1>"
 
-@app.route('/hello')
+@app.route('/hello',methods=['POST','GET','PUT','DELETE'])
+# $ curl -i http://127.0.0.1:9999/hello - response header
 def hello():
-    return "Hello World"
+    if request.method=='GET':
+        return 'You make a GET request\n',501 # custom response, status code in HTTP response
+    elif request.method=='POST':
+        return 'You make a POST request'
+    else:
+        return 'Your method can not be accepted'
 @app.route('/greet/<name>')
 def greet(name):
     return f"Hello {name}"
