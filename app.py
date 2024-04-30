@@ -23,10 +23,13 @@ def add(number1,number2):
 # dynamic Urls params
 @app.route('/handle_url_params')
 def handle_params():
-    greet=request.args['greeting']
-    name=request.args['name']
-    age=request.args['age']
-    return f'{greet} {name} {age} year old'
+    if 'greeting' in request.args.keys() and 'name' in request.args.keys():
+        greet=request.args['greeting']
+        name=request.args['name']
+        age=request.args['age']
+        return f'{greet} {name} {age} year old'
+    else:
+        return 'Missing some params'
 
 
 if __name__=='__main__':
