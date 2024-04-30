@@ -1,7 +1,4 @@
-from flask import Flask,request
-
-
-
+from flask import Flask, make_response, request
 
 app=Flask(__name__)
 
@@ -12,12 +9,20 @@ def index():
 @app.route('/hello',methods=['POST','GET','PUT','DELETE'])
 # $ curl -i http://127.0.0.1:9999/hello - response header
 def hello():
-    if request.method=='GET':
-        return 'You make a GET request\n',501 # custom response, status code in HTTP response
-    elif request.method=='POST':
-        return 'You make a POST request'
-    else:
-        return 'Your method can not be accepted'
+    # if request.method=='GET':
+    #     response=make_response
+    #     return 'You make a GET request\n',501 # custom response, status code in HTTP response
+    # elif request.method=='POST':
+    #     return 'You make a POST request'
+    # else:
+    #     return 'Your method can not be accepted'
+    response=make_response('Hello World custom response\n')
+    response.status_code=202
+    # response.headers['content-type']='application/octet-stream'
+    response.headers['content-type']='text/plain'
+
+    return response
+
 @app.route('/greet/<name>')
 def greet(name):
     return f"Hello {name}"
