@@ -1,4 +1,4 @@
-from flask import Flask, make_response, render_template, request
+from flask import Flask, make_response, render_template, request,redirect,url_for
 
 app=Flask(__name__,template_folder='templates')
 
@@ -10,7 +10,7 @@ def index():
     mylist=[10,20,30,40]
     return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
 
-@app.route('/other')
+@app.route('/ASSFFGHHGggggg')
 def other():
     # return "<h1> Flask AI Web App </h1>"
     myvalue='Trung'
@@ -36,6 +36,9 @@ def repeat(s,times=2):
 @app.template_filter('alternate_case')
 def alternate_case(s):
     return ''.join([c.upper() if i%2==0 else c.lower() for i,c in enumerate(s)])
+@app.route('/redirect_endpoint')
+def redirect_endpoint():
+    return redirect(url_for('other'))
 
 @app.route('/hello',methods=['POST','GET','PUT','DELETE'])
 # $ curl -i http://127.0.0.1:9999/hello - response header
