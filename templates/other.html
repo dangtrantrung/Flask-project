@@ -1,0 +1,17 @@
+{% extends "base.html"%} {%block title%}Orther Page{%endblock%} {%block content%}
+
+<h1>Orther Flask API web app</h1>
+<p>{{myvalue}}</p>
+<p>{{myresult}}</p>
+<p>{{mylist}}</p>
+<ul>
+    {% for item in mylist%} {%if item==300%}
+    <li style="color: red;">{{item}}</li>
+    {%elif item==400%}
+    <li style="color: green;">{{item}}</li>
+    {%else%}
+
+    <li>{{item}}</li>
+    {%endif%} {%endfor%}
+</ul>
+{%endblock%}

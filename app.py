@@ -10,6 +10,14 @@ def index():
     mylist=[10,20,30,40]
     return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
 
+@app.route('/other')
+def other():
+    # return "<h1> Flask AI Web App </h1>"
+    myvalue='Trung'
+    myresult=10+500
+    mylist=[100,200,300,400]
+    return render_template('other.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
+
 @app.route('/hello',methods=['POST','GET','PUT','DELETE'])
 # $ curl -i http://127.0.0.1:9999/hello - response header
 def hello():
