@@ -1,10 +1,14 @@
-from flask import Flask, make_response, request
+from flask import Flask, make_response, render_template, request
 
 app=Flask(__name__,template_folder='templates')
 
 @app.route('/')
 def index():
-    return "<h1> Flask AI Web App </h1>"
+    # return "<h1> Flask AI Web App </h1>"
+    myvalue='NeuralNine'
+    myresult=10+50
+    mylist=[10,20,30,40]
+    return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
 
 @app.route('/hello',methods=['POST','GET','PUT','DELETE'])
 # $ curl -i http://127.0.0.1:9999/hello - response header
