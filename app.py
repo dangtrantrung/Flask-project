@@ -5,11 +5,33 @@ app=Flask(__name__,template_folder='templates')
 
 @app.route('/')
 def index():
-    # return "<h1> Flask AI Web App </h1>"
-    myvalue='NeuralNine'
-    myresult=10+50
-    mylist=[10,20,30,40]
+    # # return "<h1> Flask AI Web App </h1>"
+    # myvalue='NeuralNine'
+    # myresult=10+50
+    # mylist=[10,20,30,40]
     return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
+    # if request.method=='GET':
+    #     return render_template('form.html')
+    # elif request.method=='POST':
+    #     return ''
+@app.route('/form',methods=['POST','GET'])
+def form():
+    # # return "<h1> Flask AI Web App </h1>"
+    # myvalue='NeuralNine'
+    # myresult=10+50
+    # mylist=[10,20,30,40]
+    # return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
+    if request.method=='GET':
+        return render_template('form.html')
+    elif request.method=='POST':
+        username=request.form.get('username')
+        password=request.form.get('password')
+        if username=='Trung' and password=='pass':
+            return 'Success'
+        else:
+            return 'Failure'
+
+
 
 @app.route('/ASSFFGHHGggggg')
 def other():
