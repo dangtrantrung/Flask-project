@@ -1,3 +1,4 @@
+import pandas as pd
 from flask import (Flask, make_response, redirect, render_template, request,
                    url_for)
 
@@ -31,6 +32,19 @@ def form():
         else:
             return 'Failure'
 
+@app.route('/file_upload',methods=['POST'])
+def file_upload():
+    file=request.files['file']
+
+    if file.content_type=='text/plain':
+        return file.read().decode()
+    elif file.content_type in ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-excel'] and not file.filename.endswith('.csv'):
+        df=pd.read_excel(file)
+        return df.to_html()
+    elif file.filename.endswith('.csv'):
+        df=pd.read_csv(file)
+        print(file.filename)
+        return df.to_html(header=None)
 
 
 @app.route('/ASSFFGHHGggggg')
