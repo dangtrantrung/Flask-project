@@ -144,8 +144,8 @@ def download(filename):
 def handle_post():
     greeting=request.json['greeting']
     name=request.json['name']
-    with open('file.txt','w') as f:
-        f.write(f'{greeting},{name}')
+    with open('file.txt','a') as f:
+        f.write(f'{greeting},{name}'+'\n')
     return jsonify({'message':'Successfully written!'})
 
 if __name__=='__main__':
