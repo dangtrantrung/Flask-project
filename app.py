@@ -1,6 +1,9 @@
+import os
+import uuid
+
 import pandas as pd
-from flask import (Flask, make_response, redirect, render_template, request,
-                   url_for)
+from flask import (Flask, Response, make_response, redirect, render_template,
+                   request, send_from_directory, url_for)
 
 app=Flask(__name__,template_folder='templates')
 
@@ -102,7 +105,7 @@ def add(number1,number2):
     result=int(number1)+int(number2)
     result2=f"kết quả là: {number1 +number2}"
     return result2
-# dynamic Urls params
+# dynamic Urls params ?greeting=...&name=...&age=...
 @app.route('/handle_url_params')
 def handle_params():
     if 'greeting' in request.args.keys() and 'name' in request.args.keys():
@@ -113,6 +116,30 @@ def handle_params():
     else:
         return 'Missing some params'
 
+
+@app.route('/convert_csv',methods=['POST'])
+def convert_csv():
+    file=request.files['file']
+    df=pd.read_excel(file)
+    response=Response(df.to_csv(),mimetype='text/csv',headers={
+        'Content-Disposition':'attachment;filename=result.csv'
+    })
+    return response
+
+@app.route('/convert_csv_two',methods=['POST'])
+def convert_csv_two():
+    file=request.files['file']
+    df=pd.read_excel(file)
+
+    if not os.path.exists('downloads'):
+        os.makedirs('downloads')
+    filename=f'{uuid.uuid4()}.csv'
+    df.to_csv(os.path.join('downloads',filename))
+    return render_template('download.html',filename=filename)
+
+@app.route('/download/<filename>')
+def download(filename):
+    return send_from_directory('downloads',filename,download_name='result_csv')
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=9999,debug=True)

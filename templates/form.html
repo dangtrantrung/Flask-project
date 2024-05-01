@@ -13,4 +13,14 @@
     <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/plain" />
     <input type="submit" value="Upload File" />
 </form>
+<h1>Convert to CSV</h1>
+<form method="post" action="{{url_for('convert_csv')}}" enctype="multipart/form-data">
+    <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/plain" />
+    <input type="submit" value="Convert to CSV" />
+</form>
+<h1>Convert to CSV 2</h1>
+<form method="post" action="{{url_for('convert_csv_two')}}" enctype="multipart/form-data">
+    <input type="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/plain" />
+    <input type="submit" value="Convert to CSV" />
+</form>
 {%endblock%}
