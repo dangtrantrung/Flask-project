@@ -1,4 +1,5 @@
-from flask import Flask, make_response, render_template, request,redirect,url_for
+from flask import (Flask, make_response, redirect, render_template, request,
+                   url_for)
 
 app=Flask(__name__,template_folder='templates')
 
