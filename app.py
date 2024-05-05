@@ -5,14 +5,14 @@ import pandas as pd
 from flask import (Flask, Response, jsonify, make_response, redirect,
                    render_template, request, send_from_directory, url_for)
 
-app=Flask(__name__,template_folder='templates')
+app=Flask(__name__,template_folder='templates',static_folder='static',static_url_path='/')
 
 @app.route('/')
 def index():
     # # return "<h1> Flask AI Web App </h1>"
-    # myvalue='NeuralNine'
-    # myresult=10+50
-    # mylist=[10,20,30,40]
+    myvalue='NeuralNine'
+    myresult=10+50
+    mylist=[10,20,30,40]
     return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
     # if request.method=='GET':
     #     return render_template('form.html')
@@ -147,6 +147,10 @@ def handle_post():
     with open('file.txt','a') as f:
         f.write(f'{greeting},{name}'+'\n')
     return jsonify({'message':'Successfully written!'})
+
+# static files
+
+
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=9999,debug=True)
