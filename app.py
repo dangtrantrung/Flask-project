@@ -27,6 +27,16 @@ def get_data():
 def clear_session():
     session.clear()
     return render_template('index.html',message=f'session cleared!!!')
+@app.route('/set_cookie')
+def set_cookie():
+    response=make_response(render_template('index.html',message='Cookie set'))
+    response.set_cookie('cookie_name','cookie_value',samesite=None)
+    return response
+@app.route('/get_cookie')
+def get_cookie():
+    cookie_value=request.cookies['cookie_name']
+
+    return render_template('index.html',message=f'Cookie value: {cookie_value}')
 
 @app.route('/')
 def index():
