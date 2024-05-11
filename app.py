@@ -23,6 +23,10 @@ def get_data():
         return render_template('index.html',message=f'name: {name}, Other: {other}')
     else:
         return render_template('index.html',message=f'No session found!!!')
+@app.route('/clear_session')
+def clear_session():
+    session.clear()
+    return render_template('index.html',message=f'session cleared!!!')
 
 @app.route('/')
 def index():
