@@ -15,8 +15,15 @@
 <body>
     <nav></nav>
     <p>this will always be here</p>
-
-    {%block content%} Default value for block content {%endblock%}
+    {% with messages=get_flashed_messages()%}{% if messages%}
+    <ul>
+        {% for message in messages%}
+        <li>
+            {{message}}
+        </li>
+        {%endfor%}
+    </ul>
+    {% endif %} {%endwith%} {%block content%} Default value for block content {%endblock%}
 </body>
 
 </html>

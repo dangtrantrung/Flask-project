@@ -2,7 +2,7 @@ import os
 import uuid
 
 import pandas as pd
-from flask import (Flask, Response, jsonify, make_response, redirect,
+from flask import (Flask, Response, flash, jsonify, make_response, redirect,
                    render_template, request, send_from_directory, session,
                    url_for)
 
@@ -185,6 +185,23 @@ def handle_post():
     return jsonify({'message':'Successfully written!'})
 
 # static files
+
+# flash messages
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method=="GET":
+        return render_template('login.html')
+    elif request.method=="POST":
+        username=request.form.get('username')
+        password=request.form.get('password')
+        if username=='Trung' and password=='123':
+            flash('Login Successful')
+            flash(f'user: {username}')
+            flash(f'pass: {password}')
+            return render_template('index.html',message='')
+        else:
+            flash(['Login failed!!!','Are you missing your account name or password?','Plz Try with another account'])
+            return render_template('index.html',message='')
 
 
 
