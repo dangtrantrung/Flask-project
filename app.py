@@ -3,9 +3,26 @@ import uuid
 
 import pandas as pd
 from flask import (Flask, Response, jsonify, make_response, redirect,
-                   render_template, request, send_from_directory, url_for)
+                   render_template, request, send_from_directory, session,
+                   url_for)
 
 app=Flask(__name__,template_folder='templates',static_folder='static',static_url_path='/')
+# session & cookies - secret_key
+app.secret_key='SOME_KEY'
+
+@app.route('/set_data')
+def set_data():
+    session['name']='Trung'
+    session['other']='Hello world'
+    return render_template('index.html',message='Session data set')
+@app.route('/get_data')
+def get_data():
+    if 'name' in session.keys() and 'other' in session.keys():
+        name = session['name']
+        other= session['other']
+        return render_template('index.html',message=f'name: {name}, Other: {other}')
+    else:
+        return render_template('index.html',message=f'No session found!!!')
 
 @app.route('/')
 def index():
@@ -13,7 +30,7 @@ def index():
     myvalue='NeuralNine'
     myresult=10+50
     mylist=[10,20,30,40]
-    return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist)
+    return render_template('index.html',myvalue=myvalue,myresult=myresult,mylist=mylist,message='Index')
     # if request.method=='GET':
     #     return render_template('form.html')
     # elif request.method=='POST':
