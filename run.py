@@ -1,10 +1,7 @@
-# refractory design pattern
-from flask import Flask
-from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
+from dbapp import create_app
 
-db=SQLAlchemy()
+flask_app=create_app()
 
-def create_app():
-    app=Flask(__name__,template_folder='templates')
-    app.config['SQLALCHEMY_DATABASE_URI']='sqlite'
+if __name__=='__main__':
+    flask_app.run(host='0.0.0.0',debug=True)
+    
