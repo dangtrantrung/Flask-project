@@ -203,7 +203,7 @@ def login():
             flash(['Login failed!!!','Are you missing your account name or password?','Plz Try with another account'])
             return render_template('index.html',message='')
 
-
+# Databases & SQLAlchemy
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=9999,debug=True)
